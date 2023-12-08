@@ -1,6 +1,9 @@
 # stretrch-rtabmap
 Setup guide for RTAB-Map on Stretch D435i robot. Integrates D435i camera for RGB-D odometry &amp; 3D mapping. Includes installation, configuration, and troubleshooting tips.
 
+[![Video](https://img.youtube.com/vi/HGohfkw_41I/maxresdefault.jpg)](https://www.youtube.com/watch?v=HGohfkw_41I)
+
+
 # RTAB-Map and RealSense D435i Camera Overview
 
 RTAB-Map (Real-Time Appearance-Based Mapping) is an advanced SLAM (Simultaneous Localization and Mapping) system used in our Stretch Hello Robot RE2 setup. It is adept at creating detailed 3D maps and performing real-time localization. The RealSense D435i camera, integral to this setup, offers superior depth sensing, crucial for effective RGB-D odometry and SLAM. This combination provides the Stretch Robot with enhanced navigation and environmental mapping capabilities.
