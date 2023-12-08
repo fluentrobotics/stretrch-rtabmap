@@ -30,4 +30,21 @@ RTAB-Map Parameters for Stretch Hello Robot RE2
         args (value="--delete_db_on_start"): Resets the database at the start, ensuring a fresh mapping session.
         publish_tf_odom (default="true"): Determines whether to publish odometry transformations, set to true for continuous odometry tracking.
 
+# Step 1: Run stretch_drivers and the camera node:
+        roslaunch stretch_core slam_data_collection.launch 
+        optional if joystick teleop does not work run this: python3 /home/hello-robot/.local/bin/stretch_xbox_controller_teleop.py
+
+# Step 2: Run the rtabmap launch file which will run RGB-D odometry:
+        roslaunch rtab_stretch SR_rtab.launch 
+
+        hint: to start a fresh mapping session: include this in SR_rtab.launch <!-- <arg name="args" value="--delete_db_on_start"/> -->
+
+# Step 3: Remote viszuvalization:
+        -> Set up ROS master (stretch) and slave (your computer) 
+        -> rviz -d ~/<your_ros_workspace>/stretch_rtabmap/SR_rtab_rviz.rviz
+
+# Save map:
+        rosrun map_server map_saver -f <name_of_map_file> map:=/rtabmap/grid_map
+
+
 These parameters are tailored to harness the capabilities of the RealSense D435i camera for efficient SLAM and odometry with RTAB-Map on the Stretch Hello Robot RE2, balancing computational efficiency and mapping accuracy.
