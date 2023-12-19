@@ -1,0 +1,24 @@
+<launch>
+
+<param name="/stretch_driver/broadcast_odom_tf" type="bool" value="false"/>
+<param name="/stretch_driver/mode" type="string" value="navigation" />
+
+<include file="$(find stretch_core)/launch/stretch_driver.launch">
+</include>
+
+<!-- <include file="$(find stretch_core)/launch/teleop_twist.launch">
+    <arg name="teleop_type" value="joystick"/>
+    <arg name="linear" value="0.3"/>
+    <arg name="angular" value="0.5"/>
+</include> -->
+
+<include file="$(find stretch_core)/launch/teleop_twist.launch">
+    <arg name="teleop_type" value="keyboard"/>
+</include>
+
+
+<!-- Copied from d435i_basic.launch -->
+<include file="$(find realsense2_camera)/launch/stretch_d435i.launch">
+</include>
+
+</launch>

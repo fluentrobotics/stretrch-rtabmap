@@ -1,0 +1,52 @@
+<launch>
+
+    <!-- Launch the rtabmap.launch file with custom parameters -->
+
+    <!-- rtabmap/odom 6d pose to /rtabmap/odom2d converter -->
+    <node pkg="rtab_stretch" type="2d_odom_convert.py" name="odom_2d_converter" output="log"/>
+
+    <!-- /camera/depth/color/points (3D pointcloud) to  /camera/scan (2D laserscan converter)-->
+    <include file="$(find rtab_stretch)/launch/pointcloud_to_laserscan.launch"/>
+
+    <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
+
+        <arg name="rgb_topic" value="/camera/color/image_raw"/>
+
+        <arg name="depth_topic" value="/camera/aligned_depth_to_color/image_raw"/>
+
+        <arg name="camera_info_topic" value="/camera/color/camera_info"/>
+
+        <arg name="depth_camera_info_topic" value="/camera/aligned_depth_to_color/camera_info"/>
+
+        <arg name="stereo" value="false"/>
+
+        <arg name="rgbd_sync" value="true"/>
+
+        <arg name="rtabmap_viz" value="false"/>
+
+        <arg name="rviz" value="false"/>
+
+        <arg name="rviz_cfg" value="/home/hello-robot/Vins_fusion_ws/src/stretch_vins_pkg/SR_rtab_rviz.rviz"/>
+
+        <arg name="args" value="--delete_db_on_start"/>
+
+        <arg name="publish_tf_odom"          default="true"/>
+
+        <!-- <arg name="Reg/Force3DoF"           value="false" /> -->
+
+        <!-- use actionlib to send goals to move_base -->
+        <!-- <param name="use_action_for_goal" type="bool" value="true"/>
+        <remap from="move_base"            to="/move_base"/> -->
+
+
+        <!-- RTAB-Map's parameters -->
+        <!-- <param name="Reg/Strategy"                 type="string" value="1"/> -->
+        <!-- <param name="Reg/Force3DoF"                type="string" value="true"/> -->
+        <!-- <param name="GridGlobal/MinSize"           type="string" value="20"/> -->
+
+        <!-- <arg name="localization" default="true"/> -->
+        
+
+    </include>
+
+</launch>

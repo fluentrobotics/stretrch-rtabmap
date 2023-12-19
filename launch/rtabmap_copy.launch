@@ -3,6 +3,18 @@
 <launch>
   <!-- Convenience launch file to launch odometry, rtabmap and rtabmap_viz nodes at once -->
 
+  <!-- For stereo:=false
+        Your RGB-D sensor should be already started with "depth_registration:=true".
+        Examples:
+           $ roslaunch freenect_launch freenect.launch depth_registration:=true
+           $ roslaunch openni2_launch openni2.launch depth_registration:=true -->
+
+  <!-- For stereo:=true
+        Your camera should be calibrated and publishing rectified left and right
+        images + corresponding camera_info msgs. You can use stereo_image_proc for image rectification.
+        Example:
+           $ roslaunch rtabmap_examples bumblebee.launch -->
+
   <!-- Choose between depth and stereo, set both to false to do only scan -->
   <arg name="stereo"                    default="false"/>
   <arg     if="$(arg stereo)" name="depth"  default="false"/>
@@ -232,8 +244,9 @@
 
           <!-- SR chnages -->
           <!-- <param name="odom_frame_id"               type="string" value="$(arg odom_frame_id)"/> -->
-          <param name="odom_frame_id"               type="string" value="vo"/>
+          <!-- <param name="odom_frame_id"               type="string" value="vo"/> -->
           <param name="frame_id"                    type="string" value="base_link"/>
+          <param name="Reg/Force3DoF"                type="string" value="true"/>
           <!-- SR chnages -->
 
 
@@ -357,8 +370,9 @@
       <!-- SR chnages -->
       <!-- <param name="frame_id"             type="string" value="$(arg frame_id)"/>
       <param name="odom_frame_id"        type="string" value="$(arg odom_frame_id)"/> -->
-      <param name="odom_frame_id"               type="string" value="vo"/>
+      <!-- <param name="odom_frame_id"               type="string" value="vo"/> -->
       <param name="frame_id"                    type="string" value="base_link"/>
+      <param name="Reg/Force3DoF"                type="string" value="true"/>
       <!-- SR chnages -->
       
       <param name="map_frame_id"         type="string" value="$(arg map_frame_id)"/>
@@ -394,8 +408,8 @@
       <param name="Vis/MaxFeatures" type="string" value="600"/>
       <!-- Param: Grid/MaxObstacleHeight = "0.0"                      [Maximum obstacles height (0=disabled).] -->
       <param name="proj_max_height" value="2.0"/>
-      <param name="proj_max_ground_height" value="0.1"/>
-      <param name="proj_max_ground_angle" value="10"/>
+      <param name="proj_max_ground_height" value="0.3"/>
+      <param name="proj_max_ground_angle" value="50"/> 
 
       <!-- Param: Grid/MinClusterSize = "10"                          [[Grid/NormalsSegmentation=true] Minimum cluster size to project the points.] -->
       <param name="proj_min_cluster_size" value="10"/>
